@@ -10,14 +10,15 @@ import {colors} from '../../utils/colors';
 
 type Props = {
   title: string;
-  handlePress: () => void;
+  onPress?: () => void;
+  style?: any;
 };
 
-const Button = ({title, handlePress}: Props) => {
+const Button = ({title, onPress, style}: Props) => {
   return (
     <TouchableOpacity
-      style={styles.container}
-      onPress={handlePress}
+      style={[styles.container, style]}
+      onPress={onPress}
       activeOpacity={0.6}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
