@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {colors} from '../../../utils/colors';
 import AuthHeader from '../../../components/AuthHeader';
@@ -18,7 +18,7 @@ const Signup = (props: Props) => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <AuthHeader title="Sign Up" onBackPress={onBackPress} />
       <Input label="Name" placeholder="John Doe" />
       <Input label="Email" placeholder="example@gmail.com" />
@@ -41,7 +41,7 @@ const Signup = (props: Props) => {
 
       {/* Google Login Button */}
       <GoogleLogin />
-    </View>
+    </ScrollView>
   );
 };
 

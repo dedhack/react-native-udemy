@@ -1,21 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, useColorScheme} from 'react-native';
+
+// Google OAuth
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import Config from 'react-native-config';
 
 import {
   Colors,
@@ -29,16 +18,18 @@ import Signup from './src/screens/auth/Signup';
 
 // Screen Imports
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const REVERSED_CLIENT_ID =
+  'com.googleusercontent.apps.147196404769-ueq0iobiknccr8lass2jtcnalk17uibn';
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  useEffect(() => {
+    GoogleSignin.configure({
+      scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+      webClientId: Config.GOOGLE_WEB_CLIENT_ID, // client ID of type WEB for your server (needed to verify user ID and offline access)
+      offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+      iosClientId: Config.GOOGLE_IOS_CLIENT_ID, // [iOS] if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+    });
+  }, []);
 
   return (
     <SafeAreaView>
