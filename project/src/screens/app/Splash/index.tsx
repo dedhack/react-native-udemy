@@ -3,6 +3,7 @@ import React from 'react';
 
 // import {styles} from './styles';
 import Button from '../../../components/Button';
+import {colors} from '../../../utils/colors';
 
 type Props = {};
 
@@ -56,11 +57,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   innerText: {
-    color: '#FCA34D',
+    color: colors.orange,
     textDecorationLine: 'underline',
   },
   footerText: {
-    color: '#4F63AC',
+    color: colors.blue,
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
