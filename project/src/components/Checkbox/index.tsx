@@ -1,5 +1,5 @@
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {colors} from '../../utils/colors';
 
 type Props = {
@@ -25,7 +25,7 @@ const Checkbox = ({checked, onCheck}: Props) => {
   );
 };
 
-export default Checkbox;
+export default memo(Checkbox);
 
 const styles = StyleSheet.create({
   container: {

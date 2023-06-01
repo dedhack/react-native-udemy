@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {colors} from '../../utils/colors';
 
 type Props = {
@@ -25,7 +25,7 @@ const Button = ({title, onPress, style}: Props) => {
   );
 };
 
-export default Button;
+export default memo(Button);
 
 const styles = StyleSheet.create({
   container: {

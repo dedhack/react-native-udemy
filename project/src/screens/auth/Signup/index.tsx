@@ -5,6 +5,8 @@ import AuthHeader from '../../../components/AuthHeader';
 import Input from '../../../components/Input';
 import Checkbox from '../../../components/Checkbox';
 import Button from '../../../components/Button';
+import Separator from '../../../components/Separator';
+import GoogleLogin from '../../../components/GoogleLogin';
 
 type Props = {};
 
@@ -33,6 +35,12 @@ const Signup = (props: Props) => {
 
       {/* Button */}
       <Button title="Sign Up" style={styles.button} />
+
+      {/* Separator */}
+      <Separator text="Or sign up with" />
+
+      {/* Google Login Button */}
+      <GoogleLogin />
     </View>
   );
 };
