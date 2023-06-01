@@ -24,6 +24,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Splash from './src/screens/app/Splash';
+
+// Screen Imports
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -37,14 +40,8 @@ function App(): JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}></ScrollView>
+    <SafeAreaView>
+      <Splash />
     </SafeAreaView>
   );
 }
