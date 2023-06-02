@@ -17,6 +17,8 @@ const Signup = (props: Props) => {
 
   const [checked, setChecked] = useState(false);
 
+  const onSignIn = () => {};
+
   return (
     <ScrollView style={styles.container}>
       <AuthHeader title="Sign Up" onBackPress={onBackPress} />
@@ -41,6 +43,13 @@ const Signup = (props: Props) => {
 
       {/* Google Login Button */}
       <GoogleLogin />
+
+      <Text style={styles.footerText}>
+        Already have an account?{' '}
+        <Text onPress={onSignIn} style={styles.footerLink}>
+          Sign In
+        </Text>
+      </Text>
     </ScrollView>
   );
 };
@@ -65,5 +74,13 @@ const styles = StyleSheet.create({
   },
   button: {
     marginVertical: 20,
+  },
+  footerText: {
+    color: colors.blue,
+    marginBottom: 56,
+    textAlign: 'center',
+  },
+  footerLink: {
+    fontWeight: 'bold',
   },
 });
