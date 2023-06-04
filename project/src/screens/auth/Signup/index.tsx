@@ -8,16 +8,20 @@ import Button from '../../../components/Button';
 import Separator from '../../../components/Separator';
 import GoogleLogin from '../../../components/GoogleLogin';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const Signup = (props: Props) => {
+const Signup = ({navigation}: Props) => {
   const onBackPress = () => {
-    console.log('Pressed');
+    navigation.goBack();
+  };
+
+  const onSignIn = () => {
+    navigation.navigate('Signin');
   };
 
   const [checked, setChecked] = useState(false);
-
-  const onSignIn = () => {};
 
   return (
     <ScrollView style={styles.container}>

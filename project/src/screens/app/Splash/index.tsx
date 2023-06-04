@@ -5,12 +5,20 @@ import React from 'react';
 import Button from '../../../components/Button';
 import {colors} from '../../../utils/colors';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const Splash = (props: Props) => {
-  const handlePress = () => {
-    console.log('Pressed');
+const Splash = ({navigation}: Props) => {
+  console.log('Splash');
+  const onSignup = () => {
+    navigation.navigate('Signup');
   };
+
+  const onSignin = () => {
+    navigation.navigate('Signin');
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -24,9 +32,9 @@ const Splash = (props: Props) => {
         <Text style={styles.title}>Here!</Text>
       </View>
 
-      <Button title="Sign Up" handlePress={handlePress} />
+      <Button title="Sign Up" onPress={onSignup} />
 
-      <Pressable hitSlop={20}>
+      <Pressable onPress={onSignin} hitSlop={20}>
         <Text style={styles.footerText}>Sign In</Text>
       </Pressable>
     </View>

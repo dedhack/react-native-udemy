@@ -7,14 +7,18 @@ import Button from '../../../components/Button';
 import Separator from '../../../components/Separator';
 import GoogleLogin from '../../../components/GoogleLogin';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const Signin = (props: Props) => {
+const Signin = ({navigation}: Props) => {
   const onBackPress = () => {
-    console.log('Pressed');
+    navigation.goBack();
   };
 
-  const onSignIn = () => {};
+  const onSignup = () => {
+    navigation.navigate('Signup');
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -34,7 +38,7 @@ const Signin = (props: Props) => {
 
       <Text style={styles.footerText}>
         Don't have an account?{' '}
-        <Text onPress={onSignIn} style={styles.footerLink}>
+        <Text onPress={onSignup} style={styles.footerLink}>
           Sign Up
         </Text>
       </Text>
