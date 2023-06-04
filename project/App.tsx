@@ -6,6 +6,9 @@ import {SafeAreaView, StyleSheet, useColorScheme} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Config from 'react-native-config';
 
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import {
   Colors,
   DebugInstructions,
@@ -18,8 +21,7 @@ import Signup from './src/screens/auth/Signup';
 
 // Screen Imports
 
-const REVERSED_CLIENT_ID =
-  'com.googleusercontent.apps.147196404769-ueq0iobiknccr8lass2jtcnalk17uibn';
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -32,10 +34,13 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView>
-      {/* <Splash /> */}
-      <Signup />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Splash" component={Splash} />
+        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Signin" component={Signin} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
