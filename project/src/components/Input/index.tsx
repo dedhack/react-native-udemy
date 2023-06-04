@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import {colors} from '../../utils/colors';
 
 type Props = {
-  label: string;
+  label?: string;
   placeholder: string;
   isPassword?: boolean;
 };
