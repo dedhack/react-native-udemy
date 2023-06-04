@@ -1,5 +1,5 @@
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {memo, useState} from 'react';
+import React, {useState} from 'react';
 import {colors} from '../../../utils/colors';
 import AuthHeader from '../../../components/AuthHeader';
 import Input from '../../../components/Input';
@@ -54,7 +54,7 @@ const Signup = (props: Props) => {
   );
 };
 
-export default memo(Signup);
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
