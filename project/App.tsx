@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 
 // Google OAuth
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -28,7 +28,31 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, color, size}) => {
+          let icon;
+
+          if (route.name === 'Home') {
+            icon = focused
+              ? require('./src/assets/tabs/home_active.png')
+              : require('./src/assets/tabs/home.png');
+          } else if (route.name === 'Profile') {
+            icon = focused
+              ? require('./src/assets/tabs/profile_active.png')
+              : require('./src/assets/tabs/profile.png');
+          } else if (route.name === 'Favorites') {
+            icon = focused
+              ? require('./src/assets/tabs/bookmark_active.png')
+              : require('./src/assets/tabs/bookmark.png');
+          }
+          // You can return any component that you like here!
+          return <Image source={icon} style={{width: 24, height: 24}} />;
+        },
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {borderTopColor: colors.lightGrey},
+      })}>
       <Tab.Screen name="Home" component={Home} />
       {/* <Tab.Screen name="Settings" component={Settings} /> */}
       <Tab.Screen name="Favorites" component={Favorites} />
