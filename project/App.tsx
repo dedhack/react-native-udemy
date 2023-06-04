@@ -6,7 +6,7 @@ import {SafeAreaView, StyleSheet, useColorScheme} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Config from 'react-native-config';
 
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {
@@ -18,6 +18,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Splash from './src/screens/app/Splash';
 import Signup from './src/screens/auth/Signup';
+import Signin from './src/screens/auth/Signin';
+import {colors} from './src/utils/colors';
 
 // Screen Imports
 
@@ -33,13 +35,22 @@ function App(): JSX.Element {
     });
   }, []);
 
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: colors.white,
+    },
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <Stack.Navigator>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Signin" component={Signin} />
       </Stack.Navigator>
+      {/* <Signup /> */}
     </NavigationContainer>
   );
 }
