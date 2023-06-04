@@ -1,60 +1,48 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {memo, useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {memo} from 'react';
 import {colors} from '../../../utils/colors';
 import AuthHeader from '../../../components/AuthHeader';
 import Input from '../../../components/Input';
-import Checkbox from '../../../components/Checkbox';
 import Button from '../../../components/Button';
 import Separator from '../../../components/Separator';
 import GoogleLogin from '../../../components/GoogleLogin';
 
 type Props = {};
 
-const Signup = (props: Props) => {
+const Signin = (props: Props) => {
   const onBackPress = () => {
     console.log('Pressed');
   };
-
-  const [checked, setChecked] = useState(false);
 
   const onSignIn = () => {};
 
   return (
     <ScrollView style={styles.container}>
-      <AuthHeader title="Sign Up" onBackPress={onBackPress} />
-      <Input label="Name" placeholder="John Doe" />
+      <AuthHeader title="Sign In" onBackPress={onBackPress} />
+
       <Input label="Email" placeholder="example@gmail.com" />
       <Input label="Password" placeholder="********" isPassword />
 
-      {/* Agreement */}
-      <View style={styles.agreeRow}>
-        <Checkbox checked={checked} onCheck={setChecked} />
-        <Text style={styles.agreeText}>
-          I agree with <Text style={styles.agreeTextBold}>Terms</Text> &{' '}
-          <Text style={styles.agreeTextBold}>Privacy</Text>
-        </Text>
-      </View>
-
       {/* Button */}
-      <Button title="Sign Up" style={styles.button} />
+      <Button title="Sign In" style={styles.button} />
 
       {/* Separator */}
-      <Separator text="Or sign up with" />
+      <Separator text="Or sign in with" />
 
       {/* Google Login Button */}
       <GoogleLogin />
 
       <Text style={styles.footerText}>
-        Already have an account?{' '}
+        Don't have an account?{' '}
         <Text onPress={onSignIn} style={styles.footerLink}>
-          Sign In
+          Sign Up
         </Text>
       </Text>
     </ScrollView>
   );
 };
 
-export default memo(Signup);
+export default memo(Signin);
 
 const styles = StyleSheet.create({
   container: {
