@@ -1,4 +1,9 @@
-export const categories = [
+interface Category {
+  id?: number;
+  title: string;
+  image: string;
+}
+export const categories: Category[] = [
   {
     title: 'Popular',
     image:
