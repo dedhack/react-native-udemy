@@ -17,19 +17,33 @@ type Category = {
 };
 
 const Home = (props: Props) => {
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState<number | null>();
+  const [keyword, setKeyword] = useState<string>('');
   const [filteredProducts, setFilteredProducts] = useState(products);
+  console.log('keyword: ', keyword);
 
   useEffect(() => {
-    if (selectedCategory) {
+    if (selectedCategory && !keyword) {
       const updatedProducts = products.filter(
         product => product?.category === selectedCategory,
       );
       setFilteredProducts(updatedProducts);
-    } else {
+    } else if (selectedCategory && keyword) {
+      const updatedProducts = products.filter(
+        product =>
+          product?.category === selectedCategory &&
+          product?.title?.toLowerCase().includes(keyword?.toLowerCase()),
+      );
+      setFilteredProducts(updatedProducts);
+    } else if (!selectedCategory && keyword) {
+      const updatedProducts = products.filter(product =>
+        product?.title?.toLowerCase().includes(keyword?.toLowerCase()),
+      );
+      setFilteredProducts(updatedProducts);
+    } else if (!keyword && !selectedCategory) {
       setFilteredProducts(products);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, keyword]);
 
   // TODO: To modify
   const onBackPress = () => {
@@ -43,7 +57,7 @@ const Home = (props: Props) => {
     item: Category;
     index: number;
   }) => {
-    console.log('item: ', item);
+    // console.log('item: ', item);
 
     return (
       <CategoryBox
@@ -63,7 +77,13 @@ const Home = (props: Props) => {
   return (
     <SafeAreaView>
       {/* <ScrollView style={styles.container}> */}
-      <Header title="Find All You Need" showSearch onBackPress={onBackPress} />
+      <Header
+        title="Find All You Need"
+        showSearch
+        keyword={keyword}
+        onSearch={setKeyword}
+        onBackPress={onBackPress}
+      />
       <FlatList
         style={styles.list}
         horizontal

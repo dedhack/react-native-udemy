@@ -13,9 +13,17 @@ type Props = {
   label?: string;
   placeholder: string;
   isPassword?: boolean;
+  value: string;
+  onChangeText: (text: string) => void;
 };
 
-const Input = ({label, placeholder, isPassword}: Props) => {
+const Input = ({
+  label,
+  placeholder,
+  isPassword,
+  value,
+  onChangeText,
+}: Props) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onEyePress = () => {
@@ -27,6 +35,8 @@ const Input = ({label, placeholder, isPassword}: Props) => {
       <Text style={styles.label}>{label}</Text>
       <View style={styles.inputContainer}>
         <TextInput
+          value={value}
+          onChangeText={onChangeText}
           style={styles.input}
           placeholder={placeholder}
           secureTextEntry={isPassword && !isPasswordVisible}

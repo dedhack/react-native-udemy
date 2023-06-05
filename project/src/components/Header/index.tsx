@@ -6,11 +6,12 @@ import Input from '../Input';
 type Props = {
   title: string;
   onBackPress: () => void;
-  //   onSearchPress: () => void;
+  onSearch: React.Dispatch<React.SetStateAction<string>>;
   //   onLogout: () => void;
   showLogout?: boolean;
   showSearch?: boolean;
   showBack?: boolean;
+  keyword: string;
 };
 
 const Header = ({
@@ -19,6 +20,8 @@ const Header = ({
   showLogout,
   showSearch,
   showBack,
+  keyword,
+  onSearch,
 }: Props) => {
   // States
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -28,7 +31,7 @@ const Header = ({
   };
 
   return (
-    <View>
+    <View style={styles.mainContainer}>
       <View style={styles.container}>
         {showBack ? (
           <Pressable hitSlop={20} onPress={onBackPress}>
@@ -63,7 +66,13 @@ const Header = ({
         )}
       </View>
 
-      {showSearchInput ? <Input placeholder="Type your keyword..." /> : null}
+      {showSearchInput ? (
+        <Input
+          onChangeText={onSearch}
+          value={keyword}
+          placeholder="Type your keyword..."
+        />
+      ) : null}
     </View>
   );
 };
@@ -71,11 +80,13 @@ const Header = ({
 export default memo(Header);
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    paddingHorizontal: 24,
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
   },
   title: {
     color: colors.black,
