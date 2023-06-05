@@ -33,21 +33,21 @@ const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 8,
-    width: width / 2,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
-  image: {
-    width: width / 2,
-    height: 220,
-    borderRadius: 8,
+    margin: 8,
   },
   title: {
     color: colors.textGrey,
+    paddingVertical: 8,
+    // borderWidth: 1,
   },
+  image: {
+    width: (width - 64) / 2,
+    height: 220,
+    borderRadius: 8,
+  },
+
   price: {
     color: colors.black,
+    paddingBottom: 8,
   },
 });

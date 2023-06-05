@@ -1,5 +1,5 @@
-import React, {memo} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text} from 'react-native';
+import React, {memo, useEffect, useState} from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
 import {categories} from '../../../data/categories';
@@ -17,6 +17,21 @@ type Category = {
 };
 
 const Home = (props: Props) => {
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [filteredProducts, setFilteredProducts] = useState(products);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      const updatedProducts = products.filter(
+        product => product?.category === selectedCategory,
+      );
+      setFilteredProducts(updatedProducts);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [selectedCategory]);
+
+  // TODO: To modify
   const onBackPress = () => {
     console.log('onBackPress');
   };
@@ -32,6 +47,8 @@ const Home = (props: Props) => {
 
     return (
       <CategoryBox
+        onPress={() => setSelectedCategory(item?.id)}
+        isSelected={item?.id === selectedCategory}
         isFirst={index === 0}
         title={item?.title}
         image={item?.image}
@@ -57,10 +74,12 @@ const Home = (props: Props) => {
       />
 
       <FlatList
-        data={products}
+        data={filteredProducts}
+        style={styles.productsList}
         numColumns={2}
         renderItem={renderProductItem}
         keyExtractor={item => String(item.id)}
+        ListFooterComponent={<View style={{height: 200}} />}
       />
       {/* </ScrollView> */}
     </SafeAreaView>
@@ -75,5 +94,9 @@ const styles = StyleSheet.create({
   },
   list: {
     // borderWidth: 1,
+    paddingVertical: 24,
+  },
+  productsList: {
+    paddingHorizontal: 16,
   },
 });
