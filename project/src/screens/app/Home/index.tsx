@@ -3,7 +3,9 @@ import {FlatList, ScrollView, StyleSheet, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
 import {categories} from '../../../data/categories';
+import {products, Product} from '../../../data/products';
 import CategoryBox from '../../../components/CategoryBox';
+import ProductHomeItem from '../../../components/ProductHomeItem';
 
 type Props = {};
 
@@ -28,26 +30,39 @@ const Home = (props: Props) => {
   }) => {
     console.log('item: ', item);
 
-    return <CategoryBox title={item?.title} image={item?.image} />;
+    return (
+      <CategoryBox
+        isFirst={index === 0}
+        title={item?.title}
+        image={item?.image}
+      />
+    );
+  };
+
+  const renderProductItem = ({item}: {item: Product}) => {
+    return <ProductHomeItem {...item} />;
   };
 
   return (
     <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <Header
-          title="Find All You Need"
-          showSearch
-          onBackPress={onBackPress}
-        />
-        <FlatList
-          style={styles.list}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={categories}
-          renderItem={renderCategoryItem}
-          keyExtractor={(item, index) => String(index)}
-        />
-      </ScrollView>
+      {/* <ScrollView style={styles.container}> */}
+      <Header title="Find All You Need" showSearch onBackPress={onBackPress} />
+      <FlatList
+        style={styles.list}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={categories}
+        renderItem={renderCategoryItem}
+        keyExtractor={(item, index) => String(index)}
+      />
+
+      <FlatList
+        data={products}
+        numColumns={2}
+        renderItem={renderProductItem}
+        keyExtractor={item => String(item.id)}
+      />
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

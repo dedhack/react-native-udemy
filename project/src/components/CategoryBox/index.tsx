@@ -6,11 +6,14 @@ type Props = {
   title?: string;
   image?: string;
   onPress?: () => void; // modify later
+  isFirst?: boolean;
 };
 
-const CategoryBox = ({title, image, onPress}: Props) => {
+const CategoryBox = ({title, image, onPress, isFirst}: Props) => {
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable
+      onPress={onPress}
+      style={[styles.container, isFirst ? {marginLeft: 24} : {}]}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{uri: image}} />
       </View>
