@@ -12,6 +12,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Product} from '../../data/products';
 import {colors} from '../../utils/colors';
 import Button from '../Button';
+import ImageCarousel from '../ImageCarousel';
 
 type Route = {
   params: {
@@ -25,9 +26,6 @@ type Props = {
 };
 
 const ProductDetails = ({route, navigation}: Props) => {
-  //   console.log('route: ', route);
-  //   console.log('navigation: ', navigation);
-
   const {product} = route?.params || {};
   console.log('product: ', product);
 
@@ -38,7 +36,12 @@ const ProductDetails = ({route, navigation}: Props) => {
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.container}>
-        <Image source={{uri: product?.image}} style={styles.image} />
+        {/* Conditional render of either single image or an image carousel */}
+        {product?.images?.length ? (
+          <ImageCarousel images={product?.images} />
+        ) : (
+          <Image source={{uri: product?.image}} style={styles.image} />
+        )}
 
         <View style={styles.content}>
           <Text style={styles.title}>{product.title}</Text>
