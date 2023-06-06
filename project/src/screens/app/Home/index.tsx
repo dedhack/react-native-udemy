@@ -2,7 +2,7 @@ import React, {memo, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
-import {categories} from '../../../data/categories';
+import {categories, Category} from '../../../data/categories';
 import {products, Product} from '../../../data/products';
 import CategoryBox from '../../../components/CategoryBox';
 import ProductHomeItem from '../../../components/ProductHomeItem';
@@ -10,18 +10,20 @@ import ProductHomeItem from '../../../components/ProductHomeItem';
 type Props = {};
 
 // add interface for category
-type Category = {
-  id?: number;
-  title: string;
-  image: string;
-};
+// type Category = {
+//   id?: number;
+//   title: string;
+//   image: string;
+// };
 
 const Home = (props: Props) => {
+  //
   const [selectedCategory, setSelectedCategory] = useState<number | null>();
   const [keyword, setKeyword] = useState<string>('');
   const [filteredProducts, setFilteredProducts] = useState(products);
-  console.log('keyword: ', keyword);
+  // console.log('keyword: ', keyword); FIXME: Remove this line
 
+  // Filter products based on selected category and keyword
   useEffect(() => {
     if (selectedCategory && !keyword) {
       const updatedProducts = products.filter(
@@ -45,11 +47,12 @@ const Home = (props: Props) => {
     }
   }, [selectedCategory, keyword]);
 
-  // TODO: To modify
+  // TODO: To modify the on back press function
   const onBackPress = () => {
     console.log('onBackPress');
   };
 
+  // Render category item
   const renderCategoryItem = ({
     item,
     index,
@@ -57,8 +60,6 @@ const Home = (props: Props) => {
     item: Category;
     index: number;
   }) => {
-    // console.log('item: ', item);
-
     return (
       <CategoryBox
         onPress={() => setSelectedCategory(item?.id)}
@@ -70,6 +71,7 @@ const Home = (props: Props) => {
     );
   };
 
+  // Render product item
   const renderProductItem = ({item}: {item: Product}) => {
     return <ProductHomeItem {...item} />;
   };

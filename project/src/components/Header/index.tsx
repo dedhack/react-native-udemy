@@ -5,13 +5,13 @@ import Input from '../Input';
 
 type Props = {
   title: string;
-  onBackPress: () => void;
-  onSearch: React.Dispatch<React.SetStateAction<string>>;
+  onBackPress?: () => void;
+  onSearch?: React.Dispatch<React.SetStateAction<string>>;
   //   onLogout: () => void;
   showLogout?: boolean;
   showSearch?: boolean;
   showBack?: boolean;
-  keyword: string;
+  keyword?: string;
 };
 
 const Header = ({
