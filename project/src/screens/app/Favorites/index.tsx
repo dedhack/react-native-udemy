@@ -5,11 +5,17 @@ import {products, Product} from '../../../data/products';
 import FavoriteItem from '../../../components/FavoriteItem';
 import Header from '../../../components/Header';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const Favorites = (props: Props) => {
+const Favorites = ({navigation}: Props) => {
   const renderItem = ({item}: {item: Product}) => {
-    return <FavoriteItem {...item} />;
+    const onProductPress = () => {
+      navigation.navigate('ProductDetails', {product: item});
+    };
+
+    return <FavoriteItem onPress={onProductPress} {...item} />;
   };
 
   return (

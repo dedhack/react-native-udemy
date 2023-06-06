@@ -1,6 +1,7 @@
 import {
   Dimensions,
   Image,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,9 +11,7 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Product} from '../../data/products';
 import {colors} from '../../utils/colors';
-// type Props = {
-//   route: any;
-// };
+import Button from '../Button';
 
 type Route = {
   params: {
@@ -22,17 +21,22 @@ type Route = {
 
 type Props = {
   route: Route;
+  navigation: any;
 };
 
-const ProductDetails = ({route}: Props) => {
+const ProductDetails = ({route, navigation}: Props) => {
   //   console.log('route: ', route);
   //   console.log('navigation: ', navigation);
 
   const {product} = route?.params || {};
   console.log('product: ', product);
 
+  const onBackPress = () => {
+    navigation?.goBack();
+  };
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safe}>
       <ScrollView style={styles.container}>
         <Image source={{uri: product?.image}} style={styles.image} />
 
@@ -41,7 +45,25 @@ const ProductDetails = ({route}: Props) => {
           <Text style={styles.price}>{product.price}</Text>
           <Text style={styles.description}>{product.description}</Text>
         </View>
+
+        <Pressable style={styles.backContainer} onPress={onBackPress}>
+          <Image
+            style={styles.backIcon}
+            source={require('../../assets/back.png')}
+          />
+        </Pressable>
       </ScrollView>
+
+      <View style={styles.footer}>
+        <Pressable style={styles.bookmarkContainer}>
+          <Image
+            style={styles.bookmarkIcon}
+            source={require('../../assets/tabs/bookmark.png')}
+          />
+        </Pressable>
+
+        <Button title="Contact Seller" />
+      </View>
     </SafeAreaView>
   );
 };
@@ -51,7 +73,20 @@ export default ProductDetails;
 const {height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: {},
+  safe: {
+    borderWidth: 5,
+    flex: 1,
+    // borderColor: 'red',
+  },
+  footer: {
+    padding: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  container: {
+    // borderWidth: 5,
+  },
   image: {
     width: '100%',
     height: height * 0.45,
@@ -77,5 +112,29 @@ const styles = StyleSheet.create({
     color: colors.grey,
     fontWeight: '300',
     marginVertical: 8,
+  },
+
+  bookmarkContainer: {
+    backgroundColor: colors.lightGrey,
+    padding: 18,
+    borderRadius: 8,
+    marginRight: 16,
+  },
+  bookmarkIcon: {
+    width: 24,
+    height: 24,
+  },
+
+  backContainer: {
+    backgroundColor: colors.white,
+    padding: 10,
+    margin: 24,
+    borderRadius: 8,
+    marginRight: 16,
+    position: 'absolute',
+  },
+  backIcon: {
+    width: 20,
+    height: 20,
   },
 });
