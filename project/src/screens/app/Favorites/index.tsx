@@ -8,7 +8,7 @@ import Header from '../../../components/Header';
 type Props = {};
 
 const Favorites = (props: Props) => {
-  const renderItem = ({item}) => {
+  const renderItem = ({item}: {item: Product}) => {
     return <FavoriteItem {...item} />;
   };
 

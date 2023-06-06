@@ -7,21 +7,14 @@ import {products, Product} from '../../../data/products';
 import CategoryBox from '../../../components/CategoryBox';
 import ProductHomeItem from '../../../components/ProductHomeItem';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-// add interface for category
-// type Category = {
-//   id?: number;
-//   title: string;
-//   image: string;
-// };
-
-const Home = (props: Props) => {
-  //
+const Home = ({navigation}: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>();
   const [keyword, setKeyword] = useState<string>('');
   const [filteredProducts, setFilteredProducts] = useState(products);
-  // console.log('keyword: ', keyword); FIXME: Remove this line
 
   // Filter products based on selected category and keyword
   useEffect(() => {
@@ -52,6 +45,7 @@ const Home = (props: Props) => {
     console.log('onBackPress');
   };
 
+  ////////////////////////////
   // Render category item
   const renderCategoryItem = ({
     item,
@@ -71,9 +65,14 @@ const Home = (props: Props) => {
     );
   };
 
+  ////////////////////////////
   // Render product item
   const renderProductItem = ({item}: {item: Product}) => {
-    return <ProductHomeItem {...item} />;
+    const onProductPress = (product: Product) => {
+      navigation.navigate('ProductDetails', {product});
+    };
+
+    return <ProductHomeItem {...item} onPress={() => onProductPress(item)} />;
   };
 
   return (

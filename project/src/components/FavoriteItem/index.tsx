@@ -4,7 +4,7 @@ import {colors} from '../../utils/colors';
 
 type Props = {
   title: string;
-  price: number;
+  price: string;
   image: string;
   onPress?: () => void;
 };

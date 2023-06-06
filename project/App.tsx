@@ -16,9 +16,9 @@ import Splash from './src/screens/app/Splash';
 import Signup from './src/screens/auth/Signup';
 import Signin from './src/screens/auth/Signin';
 import Home from './src/screens/app/Home';
-import Settings from './src/screens/app/Settings';
 import Favorites from './src/screens/app/Favorites';
 import Profile from './src/screens/app/Profile';
+import ProductDetails from './src/components/ProductDetails';
 
 // Utils
 import {colors} from './src/utils/colors';
@@ -54,7 +54,6 @@ const Tabs = () => {
         tabBarStyle: {borderTopColor: colors.lightGrey},
       })}>
       <Tab.Screen name="Home" component={Home} />
-      {/* <Tab.Screen name="Settings" component={Settings} /> */}
       <Tab.Screen name="Favorites" component={Favorites} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
@@ -92,11 +91,11 @@ function App(): JSX.Element {
                 component={Tabs}
                 options={{headerShown: false}}
               />
-              {/* <Stack.Screen
-                name="Splash"
-                component={Home}
+              <Stack.Screen
+                name="ProductDetails"
+                component={ProductDetails}
                 options={{headerShown: false}}
-              /> */}
+              />
             </>
           ) : (
             <>
