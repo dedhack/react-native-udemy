@@ -7,7 +7,7 @@ type Props = {
   title: string;
   onBackPress?: () => void;
   onSearch?: React.Dispatch<React.SetStateAction<string>>;
-  //   onLogout: () => void;
+  onLogout?: () => void;
   showLogout?: boolean;
   showSearch?: boolean;
   showBack?: boolean;
