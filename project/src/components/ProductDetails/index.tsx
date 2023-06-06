@@ -1,6 +1,7 @@
 import {
   Dimensions,
   Image,
+  Linking,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -31,6 +32,17 @@ const ProductDetails = ({route, navigation}: Props) => {
 
   const onBackPress = () => {
     navigation?.goBack();
+  };
+
+  const onContact = () => {
+    // Make a phone call
+    // Linking.openURL(`tel:${product?.user?.phone}`);
+    const phone = '12345678';
+    Linking.openURL(`tel:${phone}`);
+
+    // send an email
+    const email = 'test@test.com';
+    Linking.openURL(`mailto:${email}`);
   };
 
   return (
@@ -65,7 +77,7 @@ const ProductDetails = ({route, navigation}: Props) => {
           />
         </Pressable>
 
-        <Button title="Contact Seller" />
+        <Button onPress={onContact} title="Contact Seller" />
       </View>
     </SafeAreaView>
   );
