@@ -1,22 +1,24 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../utils/colors';
 
 type Props = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
+  onPress?: () => void;
+  style: any;
 };
 
-const ListItem = ({title, subtitle}: Props) => {
+const ListItem = ({title, subtitle, onPress, style}: Props) => {
   return (
-    <View style={styles.container}>
+    <Pressable onPress={onPress} style={[styles.container, style]}>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        {!!subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
       </View>
 
       <Image style={styles.arrow} source={require('../../assets/arrow.png')} />
-    </View>
+    </Pressable>
   );
 };
 
@@ -51,11 +53,11 @@ const styles = StyleSheet.create({
     color: colors.blue,
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 6,
   },
   subtitle: {
     color: colors.grey,
     fontSize: 12,
+    marginTop: 6,
   },
   arrow: {
     width: 32,

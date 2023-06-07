@@ -7,14 +7,20 @@ import Header from '../../../components/Header';
 import ListItem from '../../../components/ListItem';
 import Button from '../../../components/Button';
 
-type Props = {};
+type Props = {
+  navigation: any;
+};
 
-const Profile = (props: Props) => {
+const Profile = ({navigation}: Props) => {
   // FIXME: Hardcoded
   const num = 10;
 
   const onLogout = () => {
     console.log('logout');
+  };
+
+  const onSettingsPress = () => {
+    navigation.navigate('Settings');
   };
 
   return (
@@ -26,7 +32,11 @@ const Profile = (props: Props) => {
           <Text style={styles.email}>Useremail</Text>
 
           <ListItem title="My Listings" subtitle={`You have ${num} listings`} />
-          <ListItem title="Setting" subtitle="Account, FAQ, Contact" />
+          <ListItem
+            onPress={onSettingsPress}
+            title="Setting"
+            subtitle="Account, FAQ, Contact"
+          />
         </View>
 
         <Button style={{flex: 0}} title="Add a new listing" />
